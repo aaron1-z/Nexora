@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero";
+import HeroEnhanced from "@/components/HeroEnhanced";
 import ProductStrip from "@/components/ProductStrip";
 import BriefShowcase from "@/components/BriefShowcase";
 import LiveSignals from "@/components/LiveSignals";
@@ -9,8 +9,8 @@ import CTA from "@/components/CTA";
 
 export default function Home() {
   return (
-    <div className="relative">
-      <Hero />
+    <div className="relative bg-gray-50">
+      <HeroEnhanced />
       <ProductStrip />
       <BriefShowcase />
       <LiveSignals />

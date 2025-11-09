@@ -31,14 +31,23 @@ export default function Nav() {
     }
   };
 
+  const handleContact = () => {
+    if (calendlyUrl) {
+      window.open(calendlyUrl, "_blank");
+    } else {
+      // Scroll to contact section or open email
+      window.location.href = "mailto:contact@nexora.com";
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-lg border-b border-line shadow-sm"
-          : "bg-white border-b border-line"
+          ? "bg-white/90 backdrop-blur-lg shadow-sm"
+          : "bg-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,18 +66,17 @@ export default function Nav() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-muted hover:text-text transition-colors text-sm font-medium"
+                className="text-gray-600 hover:text-black transition-colors text-sm font-medium"
               >
                 {item.label}
               </a>
             ))}
-            <Button
-              onClick={handleGetStarted}
-              disabled={!calendlyUrl}
-              variant="primary"
+            <button
+              onClick={handleContact}
+              className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-900 transition-all duration-200"
             >
-              Get started
-            </Button>
+              Contact
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -100,20 +108,18 @@ export default function Nav() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="block text-muted hover:text-text transition-colors py-2 text-sm font-medium"
+                  className="block text-gray-600 hover:text-black transition-colors py-2 text-sm font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
-              <Button
-                onClick={handleGetStarted}
-                disabled={!calendlyUrl}
-                variant="primary"
-                className="w-full"
+              <button
+                onClick={handleContact}
+                className="w-full bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-900 transition-all duration-200"
               >
-                Get started
-              </Button>
+                Contact
+              </button>
             </div>
           </motion.div>
         )}

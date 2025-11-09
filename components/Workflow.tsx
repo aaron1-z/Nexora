@@ -1,8 +1,14 @@
 "use client";
 
 import { FadeInUp } from "@/components/Motion";
-import { Card, Button } from "@/components/Ui";
 import { ArrowRight } from "lucide-react";
+
+const workflowSteps = [
+  "Define your topic",
+  "Receive Flash Signals",
+  "Get Action Brief",
+  "Set Triggers & Export",
+];
 
 export default function Workflow() {
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
@@ -10,74 +16,68 @@ export default function Workflow() {
   const handleGetStarted = () => {
     if (calendlyUrl) {
       window.open(calendlyUrl, "_blank");
+    } else {
+      window.location.href = "mailto:contact@nexora.com";
     }
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="bg-elevated border-2 border-line p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="bg-gray-50 border border-gray-200 rounded-3xl p-8 md:p-12 lg:p-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Side - Workflow Steps */}
             <FadeInUp>
-              <div className="space-y-4">
-                <h2 className="text-3xl font-bold text-text mb-4">Your workflow</h2>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
-                      1
+              <div className="space-y-8">
+                <h2 className="text-3xl md:text-4xl font-semibold text-black tracking-tight">
+                  Your workflow
+                </h2>
+                <div className="space-y-4">
+                  {workflowSteps.map((step, index) => (
+                    <div key={index}>
+                      <div className="flex items-center gap-4">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold shadow-sm">
+                          {index + 1}
+                        </div>
+                        <span className="text-lg text-gray-700 font-normal">
+                          {step}
+                        </span>
+                      </div>
+                      {/* Arrow between steps (except after the last one) */}
+                      {index < workflowSteps.length - 1 && (
+                        <div className="flex items-center ml-5 my-2">
+                          <ArrowRight className="w-5 h-5 text-gray-400" />
+                        </div>
+                      )}
                     </div>
-                    <span className="text-muted">Define your topic</span>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <ArrowRight className="w-4 h-4 text-muted" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
-                      2
-                    </div>
-                    <span className="text-muted">Receive Flash Signals</span>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <ArrowRight className="w-4 h-4 text-muted" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
-                      3
-                    </div>
-                    <span className="text-muted">Get Action Brief</span>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <ArrowRight className="w-4 h-4 text-muted" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm font-bold">
-                      4
-                    </div>
-                    <span className="text-muted">Set Triggers & Export</span>
-                  </div>
+                  ))}
                 </div>
               </div>
             </FadeInUp>
 
-            <FadeInUp delay={0.1}>
-              <div className="flex flex-col items-center justify-center">
-                <Button
-                  onClick={handleGetStarted}
-                  disabled={!calendlyUrl}
-                  variant="primary"
-                  className="text-base px-8 py-4"
-                >
-                  Get started
-                </Button>
+            {/* Right Side - CTA */}
+            <FadeInUp delay={0.2}>
+              <div className="flex flex-col items-center justify-center lg:items-start space-y-6">
+                <div className="text-center lg:text-left">
+                  <p className="text-gray-600 text-base leading-relaxed mb-6">
+                    Ready to transform your intelligence workflow? Book a session and see Nexora in action.
+                  </p>
+                  <button
+                    onClick={handleGetStarted}
+                    className="bg-blue-600 text-white px-8 py-3.5 rounded-full text-base font-semibold hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
+                  >
+                    Get started
+                  </button>
+                </div>
                 {!calendlyUrl && (
-                  <p className="text-xs text-muted mt-2 text-center">
-                    Set NEXT_PUBLIC_CALENDLY_URL
+                  <p className="text-xs text-gray-500 text-center lg:text-left">
+                    Contact: contact@nexora.com
                   </p>
                 )}
               </div>
             </FadeInUp>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   );
